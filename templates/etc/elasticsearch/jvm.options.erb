@@ -25,13 +25,15 @@ defaults = {
   '-Dlog4j.shutdownHookEnabled' => '-Dlog4j.shutdownHookEnabled=false',
   '-Dlog4j2.disable.jmx' => '-Dlog4j2.disable.jmx=true',
   'HeapDumpOnOutOfMemoryError' => '-XX:+HeapDumpOnOutOfMemoryError',
-  'PrintGCDetails' => '-XX:+PrintGCDetails',
-  'PrintGCDateStamps' => '-XX:+PrintGCDateStamps',
-  'PrintTenuringDistribution' => '-XX:+PrintTenuringDistribution',
-  'Xloggc' => "-Xloggc:#{@logdir}/gc.log",
-  'UseGCLogFileRotation' => '-XX:+UseGCLogFileRotation',
-  'NumberOfGCLogFiles' => '-XX:NumberOfGCLogFiles=32',
-  'GCLogFileSize' => '-XX:GCLogFileSize=64m',
+  '8:PrintGCDetails' => '8:-XX:+PrintGCDetails',
+  '8:PrintGCDateStamps' => '8:-XX:+PrintGCDateStamps',
+  '8:PrintTenuringDistribution' => '8:-XX:+PrintTenuringDistribution',
+  '8:Xloggc' => "8:-Xloggc:#{@logdir}/gc.log",
+  '8:UseGCLogFileRotation' => '8:-XX:+UseGCLogFileRotation',
+  '8:NumberOfGCLogFiles' => '8:-XX:NumberOfGCLogFiles=32',
+  '8:GCLogFileSize' => '8:-XX:GCLogFileSize=64m',
+  '9-:-Xlog' => "9-:-Xlog:gc*,gc+age=trace,safepoint:file=#{@logdir}/gc.log:utctime,pid,tags:filecount=32,filesize=64m",
+  '9-:-Djava.locale.providers' => '9-:-Djava.locale.providers=COMPAT',
 }
 defaults.each {|k,v| set_default(@jvm_options, k, v)}
 
